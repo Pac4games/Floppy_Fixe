@@ -1,18 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://cccj5161diglm"]
+[gd_scene load_steps=7 format=3 uid="uid://cccj5161diglm"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_25l5c"]
 [ext_resource type="Texture2D" uid="uid://chbje5h77enci" path="res://assets/bg.png" id="1_wp127"]
 [ext_resource type="PackedScene" uid="uid://nk1tofw6dgkw" path="res://scenes/fixe.tscn" id="2_fblyw"]
 [ext_resource type="PackedScene" uid="uid://kndqra5rweoc" path="res://scenes/ground.tscn" id="4_elkyq"]
+[ext_resource type="PackedScene" uid="uid://cb7slwuuls7qv" path="res://scenes/pipe.tscn" id="4_u0i2s"]
+[ext_resource type="PackedScene" uid="uid://c5y0xd8c68k3y" path="res://scenes/pipe_timer.tscn" id="5_2j8da"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_25l5c")
+pipe_scene = ExtResource("4_u0i2s")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(800, 400)
 texture = ExtResource("1_wp127")
 
+[node name="Ground" parent="." instance=ExtResource("4_elkyq")]
+z_index = 2
+
 [node name="Fixe" parent="." instance=ExtResource("2_fblyw")]
+z_index = 1
 position = Vector2(576, 324)
 
-[node name="Ground" parent="." instance=ExtResource("4_elkyq")]
+[node name="PipeTimer" parent="." instance=ExtResource("5_2j8da")]
+wait_time = 1.5
+
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
