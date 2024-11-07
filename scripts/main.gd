@@ -21,10 +21,18 @@ func new_game() -> void:
 	scroll = 0
 	player.reset()
 
+func start_game() -> void:
+	game_running = true
+	player.flying = true
+	player.flop()
+
 func _ready() -> void:
 	new_game()
 
-func _input(event:InputEvent) -> void:
-	if (not game_over):
-		if (event.is_action_pressed("Flop")):
-			pass
+func _physics_process(_delta:float) -> void:
+	if (!game_over):
+		if (Input.is_action_just_pressed("Flop")):
+			if (!game_running):
+				start_game()
+			elif player.flying:
+				player.flop()

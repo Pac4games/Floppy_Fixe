@@ -1,7 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1730976632
+::res://::1731012519
 icon.svg::CompressedTexture2D::4137566969074344756::1730976035::1730976041::1::::<><>::
-::res://assets/::1730977333
+::res://assets/::1730977336
 bg.png::CompressedTexture2D::5266782834728010208::1730977314::1730977336::1::::<><>::
 bird1.png::CompressedTexture2D::8045134734758138278::1730976703::1730976742::1::::<><>::
 bird2.png::CompressedTexture2D::3024029568715798016::1730976703::1730976742::1::::<><>::
@@ -9,5 +9,9 @@ bird3.png::CompressedTexture2D::7601701358325491324::1730976703::1730976742::1::
 ground.png::CompressedTexture2D::4504955153262596570::1730976703::1730976742::1::::<><>::
 pipe.png::CompressedTexture2D::9151015519754293255::1730976703::1730976742::1::::<><>::
 restart.png::CompressedTexture2D::2058114349849827435::1730976703::1730976742::1::::<><>::
-::res://scenes/::1730976616
-::res://scripts/::1730976632
+::res://scenes/::1730984862
+fixe.tscn::PackedScene::934712060823194890::1730982399::0::1::::<><>::res://scripts/fixe.gd<>uid://dmvegt5dvn1mo::::res://assets/bird1.png<>uid://bjc4lb55n5g0w::::res://assets/bird2.png<>uid://dgkk573c46lrg::::res://assets/bird3.png
+main.tscn::PackedScene::4917949251604123914::1730984862::0::1::::<><>::res://scripts/main.gd<>uid://chbje5h77enci::::res://assets/bg.png<>uid://nk1tofw6dgkw::::res://scenes/fixe.tscn
+::res://scripts/::1730984862
+fixe.gd::GDScript::-1::1730984122::0::1::::<>CharacterBody2D<>::
+main.gd::GDScript::-1::1730984862::0::1::::<>Node<>::
