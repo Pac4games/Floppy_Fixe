@@ -1,18 +1,19 @@
 extends Node
 
 @onready var player:CharacterBody2D = $Fixe
+@onready var ground:Area2D = $Ground
 
 @export var SCROLL_SPEED:int = 4
 @export var GROUND_HEIGHT:int
 @export var PIPE_DELAY:int = 100
 @export var PIPE_RANGE:int = 200
-@export var SCREEN_SIZE:Vector2i
 
 var game_running:bool
 var game_over:bool
 var scroll:float
 var score:int
 var pipes:Array
+var screen_size:Vector2i
 
 func new_game() -> void:
 	game_running = false
@@ -27,6 +28,7 @@ func start_game() -> void:
 	player.flop()
 
 func _ready() -> void:
+	screen_size = get_window().size
 	new_game()
 
 func _physics_process(_delta:float) -> void:
@@ -36,3 +38,13 @@ func _physics_process(_delta:float) -> void:
 				start_game()
 			elif player.flying:
 				player.flop()
+
+func _process(_delta:float) -> void:
+	if (game_running):
+		scroll += SCROLL_SPEED
+
+		# Reset ground scroll
+		if scroll >= screen_size.x:
+			scroll = 0
+
+		ground.position.x = -scroll

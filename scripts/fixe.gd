@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var GRAVITY:int = 1000
 @export var MAX_VELOCITY:int = 600
 @export var FLOP_SPEED:int = -500
-@export var START_POS:Vector2 = Vector2(959, 541)
+@export var START_POS:Vector2 = Vector2(576, 324)
 
 var flying:bool
 var falling:bool
