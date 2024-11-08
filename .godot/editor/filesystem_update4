@@ -1,9 +1,10 @@
-res://scripts/fixe.gd
-res://scripts/main.gd
 res://scenes/main.tscn
 res://scenes/fixe.tscn
 res://scenes/ground.tscn
-res://scripts/ground.gd
 res://scenes/pipe.tscn
-res://scripts/pipe.gd
 res://scenes/pipe_timer.tscn
+res://scripts/main.gd
+res://scripts/ground.gd
+res://scripts/pipe.gd
+res://scenes/game_over.tscn
+res://scripts/game_over.gd

@@ -1,28 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://cccj5161diglm"]
+[gd_scene load_steps=8 format=3 uid="uid://cccj5161diglm"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_25l5c"]
-[ext_resource type="Texture2D" uid="uid://chbje5h77enci" path="res://assets/bg.png" id="1_wp127"]
 [ext_resource type="PackedScene" uid="uid://nk1tofw6dgkw" path="res://scenes/fixe.tscn" id="2_fblyw"]
+[ext_resource type="PackedScene" uid="uid://b5235l87fohj5" path="res://scenes/game_over.tscn" id="3_crygh"]
 [ext_resource type="PackedScene" uid="uid://kndqra5rweoc" path="res://scenes/ground.tscn" id="4_elkyq"]
+[ext_resource type="Texture2D" uid="uid://di6m5ca1d3fcl" path="res://assets/bg.jpg" id="4_eo46x"]
 [ext_resource type="PackedScene" uid="uid://cb7slwuuls7qv" path="res://scenes/pipe.tscn" id="4_u0i2s"]
-[ext_resource type="PackedScene" uid="uid://c5y0xd8c68k3y" path="res://scenes/pipe_timer.tscn" id="5_2j8da"]
+[ext_resource type="FontFile" uid="uid://dn5qjtakljh3a" path="res://assets/fonts/ka1.ttf" id="6_k1e6e"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_25l5c")
 pipe_scene = ExtResource("4_u0i2s")
 
+[node name="GameOver" parent="." instance=ExtResource("3_crygh")]
+
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(800, 400)
-texture = ExtResource("1_wp127")
+position = Vector2(578, 339)
+scale = Vector2(0.622483, 0.622483)
+texture = ExtResource("4_eo46x")
 
 [node name="Ground" parent="." instance=ExtResource("4_elkyq")]
 z_index = 2
 
 [node name="Fixe" parent="." instance=ExtResource("2_fblyw")]
-z_index = 1
 position = Vector2(576, 324)
 
-[node name="PipeTimer" parent="." instance=ExtResource("5_2j8da")]
+[node name="PipeTimer" type="Timer" parent="."]
 wait_time = 1.5
 
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 516.0
+offset_top = 55.0
+offset_right = 629.0
+offset_bottom = 127.0
+theme_override_fonts/font = ExtResource("6_k1e6e")
+theme_override_font_sizes/font_size = 64
+text = "42
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
