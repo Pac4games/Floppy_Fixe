@@ -91,7 +91,7 @@ func _physics_process(_delta:float) -> void:
 				player.flop()
 				check_top()
 
-func _process(delta:float) -> void:
+func _process(_delta:float) -> void:
 	if (game_running):
 		scroll += SCROLL_SPEED
 		# Reset ground scroll
@@ -101,3 +101,7 @@ func _process(delta:float) -> void:
 
 		for pipe in pipes:
 			pipe.position.x -= SCROLL_SPEED
+
+		if (pipes.size() >= 5):
+			pipes[0].queue_free()
+			pipes.pop_front()
