@@ -1,7 +1,7 @@
 res://scenes/main.tscn
+res://scripts/save_manager.gd
 res://scenes/fixe.tscn
 res://scenes/ground.tscn
 res://scenes/pipe.tscn
 res://scenes/game_over.tscn
 res://scripts/main.gd
-res://scripts/fixe.gd

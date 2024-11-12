@@ -1,8 +1,8 @@
+CanvasLayer
+Node
 AnimationPlayer
 Node2D
-Node
 Button
-CanvasLayer
 CollisionShape2D
 Area2D
 Label

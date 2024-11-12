@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cccj5161diglm"]
+[gd_scene load_steps=9 format=3 uid="uid://cccj5161diglm"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_25l5c"]
 [ext_resource type="PackedScene" uid="uid://nk1tofw6dgkw" path="res://scenes/fixe.tscn" id="2_fblyw"]
 [ext_resource type="PackedScene" uid="uid://b5235l87fohj5" path="res://scenes/game_over.tscn" id="3_crygh"]
+[ext_resource type="Script" path="res://scripts/save_manager.gd" id="3_wncvn"]
 [ext_resource type="PackedScene" uid="uid://kndqra5rweoc" path="res://scenes/ground.tscn" id="4_elkyq"]
 [ext_resource type="Texture2D" uid="uid://di6m5ca1d3fcl" path="res://assets/bg.jpg" id="4_eo46x"]
 [ext_resource type="PackedScene" uid="uid://cb7slwuuls7qv" path="res://scenes/pipe.tscn" id="4_u0i2s"]
@@ -11,7 +12,9 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_25l5c")
 pipe_scene = ExtResource("4_u0i2s")
-PIPE_RANGE = 125
+
+[node name="SaveManager" type="Node" parent="."]
+script = ExtResource("3_wncvn")
 
 [node name="GameOver" parent="." instance=ExtResource("3_crygh")]
 
