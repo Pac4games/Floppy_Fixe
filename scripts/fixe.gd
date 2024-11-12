@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite:AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player:AnimationPlayer = $AnimationPlayer
 
 @export var GRAVITY:int = 1000
 @export var MAX_VELOCITY:int = 600
@@ -15,6 +16,7 @@ func reset() -> void:
 	flying = false
 	position = START_POS    # Already created by CharacterBody2D
 	set_rotation(0)
+	animation_player.play("idle")
 
 func flop() -> void:
 	velocity.y = FLOP_SPEED

@@ -6,6 +6,8 @@ extends Node
 @onready var score_label:Label = $ScoreLabel
 @onready var restart_button:CanvasLayer = $GameOver
 
+# Unsure of the correct syntax to get the PackedScene directly from the file
+# path, so it had to be set directly on the Godot editor
 @export var pipe_scene:PackedScene
 @export var SCROLL_SPEED:int = 4
 @export var PIPE_DELAY:int = 100
@@ -25,6 +27,7 @@ func new_game() -> void:
 	scroll = 0
 	score = 0
 	score_label.text = str(score)
+	score_label.hide()
 	restart_button.hide()
 	get_tree().call_group("pipes", "queue_free")
 	pipes.clear()
@@ -34,10 +37,12 @@ func new_game() -> void:
 func start_game() -> void:
 	game_running = true
 	player.flying = true
+	player.animation_player.stop()
 	player.flop()
 	timer.start()
+	score_label.show()
 
-func stop_game():
+func stop_game() -> void:
 	timer.stop()
 	player.flying = false
 	game_running = false
@@ -62,7 +67,7 @@ func generate_pipes() -> void:
 	add_child(pipe)
 	pipes.append(pipe)
 
-func check_top():
+func check_top() -> void:
 	if (player.position.y < 0):
 		player.falling = true
 		stop_game()

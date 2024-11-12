@@ -11,6 +11,7 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_25l5c")
 pipe_scene = ExtResource("4_u0i2s")
+PIPE_RANGE = 125
 
 [node name="GameOver" parent="." instance=ExtResource("3_crygh")]
 
@@ -29,6 +30,7 @@ position = Vector2(576, 324)
 wait_time = 1.5
 
 [node name="ScoreLabel" type="Label" parent="."]
+z_index = 2
 offset_left = 516.0
 offset_top = 55.0
 offset_right = 629.0

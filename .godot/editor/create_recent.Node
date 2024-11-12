@@ -1,3 +1,6 @@
+AnimationPlayer
+Node2D
+Node
 Button
 CanvasLayer
 CollisionShape2D
@@ -7,4 +10,3 @@ Timer
 Sprite2D
 AnimatedSprite2D
 CharacterBody2D
-Node
