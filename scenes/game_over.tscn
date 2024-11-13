@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5235l87fohj5"]
+[gd_scene load_steps=7 format=3 uid="uid://b5235l87fohj5"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_nqpsn"]
 [ext_resource type="Texture2D" uid="uid://4k73wdosect4" path="res://assets/restart.png" id="1_xs24x"]
+[ext_resource type="FontFile" uid="uid://dn5qjtakljh3a" path="res://assets/fonts/ka1.ttf" id="3_vvmlq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8isx1"]
 texture = ExtResource("1_xs24x")
@@ -15,6 +16,13 @@ texture = ExtResource("1_xs24x")
 [node name="GameOver" type="CanvasLayer"]
 script = ExtResource("1_nqpsn")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 443.0
+offset_top = 182.0
+offset_right = 718.0
+offset_bottom = 541.0
+color = Color(1, 0.821198, 0.541152, 1)
+
 [node name="RestartButton" type="Button" parent="."]
 offset_left = 501.0
 offset_top = 462.0
@@ -23,5 +31,33 @@ offset_bottom = 525.0
 theme_override_styles/hover = SubResource("StyleBoxTexture_8isx1")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_5ngsd")
 theme_override_styles/normal = SubResource("StyleBoxTexture_s5ekx")
+
+[node name="HIGHSCORE" type="Label" parent="."]
+offset_left = 476.0
+offset_top = 267.0
+offset_right = 691.0
+offset_bottom = 301.0
+theme_override_fonts/font = ExtResource("3_vvmlq")
+theme_override_font_sizes/font_size = 29
+text = "HIGHSCORE"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 475.0
+offset_top = 307.0
+offset_right = 690.0
+offset_bottom = 355.0
+theme_override_fonts/font = ExtResource("3_vvmlq")
+theme_override_font_sizes/font_size = 42
+text = "42"
+horizontal_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="."]
+offset_left = 487.0
+offset_top = 201.0
+offset_right = 681.0
+offset_bottom = 241.0
+text = "You suck lmao"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]

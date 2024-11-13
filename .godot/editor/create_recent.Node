@@ -1,3 +1,5 @@
+Label
+ColorRect
 CanvasLayer
 Node
 AnimationPlayer
@@ -5,7 +7,6 @@ Node2D
 Button
 CollisionShape2D
 Area2D
-Label
 Timer
 Sprite2D
 AnimatedSprite2D

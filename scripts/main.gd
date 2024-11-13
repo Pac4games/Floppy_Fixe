@@ -4,7 +4,7 @@ extends Node
 @onready var ground:Area2D = $Ground
 @onready var timer:Timer = $PipeTimer
 @onready var score_label:Label = $ScoreLabel
-@onready var restart_button:CanvasLayer = $GameOver
+@onready var game_over_menu:CanvasLayer = $GameOver
 @onready var save_manager:Node = $SaveManager
 
 # Unsure of the correct syntax to get the PackedScene directly from the file
@@ -29,7 +29,7 @@ func new_game() -> void:
 	score = 0
 	score_label.text = str(score)
 	score_label.hide()
-	restart_button.hide()
+	game_over_menu.hide()
 	get_tree().call_group("pipes", "queue_free")
 	pipes.clear()
 	generate_pipes()
@@ -42,15 +42,16 @@ func start_game() -> void:
 	player.flop()
 	timer.start()
 	score_label.show()
-	print("HIGH SCORE: " + str(save_manager.high_score))
+	print("HIGH SCORE: " + str(save_manager.highscore))
 
 func stop_game() -> void:
 	timer.stop()
 	player.flying = false
 	game_running = false
 	game_over = true
-	save_manager.check_high_score(score)
-	restart_button.show()
+	save_manager.check_highscore(score)
+	game_over_menu.display_scores(score, save_manager.highscore)
+	game_over_menu.show()
 
 func player_hit() -> void:
 	player.falling = true

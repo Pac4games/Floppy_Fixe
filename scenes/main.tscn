@@ -17,6 +17,7 @@ pipe_scene = ExtResource("4_u0i2s")
 script = ExtResource("3_wncvn")
 
 [node name="GameOver" parent="." instance=ExtResource("3_crygh")]
+visible = false
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(578, 339)

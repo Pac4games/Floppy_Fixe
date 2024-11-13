@@ -2,22 +2,22 @@ extends Node
 
 const SAVE_FILE_PATH:String = "user://floppy_fixe.save"
 
-var high_score:int
+var highscore:int
 
-func load_high_score() -> void:
+func load_highscore() -> void:
 	if (FileAccess.file_exists(SAVE_FILE_PATH)):
 		var save_file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
-		high_score = int(save_file.get_as_text())
+		highscore = int(save_file.get_as_text())
 		save_file.close()
 	else:
-		high_score = 0
+		highscore = 0
 
-func check_high_score(new_score:int) -> void:
-	if (new_score > high_score):
-		high_score = new_score
+func check_highscore(new_score:int) -> void:
+	if (new_score > highscore):
+		highscore = new_score
 		var save_file:FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
-		save_file.store_string(str(high_score))
+		save_file.store_string(str(highscore))
 		save_file.close()
 
 func _ready() -> void:
-	load_high_score()
+	load_highscore()
