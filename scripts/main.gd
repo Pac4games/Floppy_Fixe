@@ -46,6 +46,7 @@ func start_game() -> void:
 
 func stop_game() -> void:
 	timer.stop()
+	player.death_sfx.play()
 	player.flying = false
 	game_running = false
 	game_over = true

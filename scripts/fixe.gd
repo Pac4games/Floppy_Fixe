@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var animated_sprite:AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready var flop_sfx:AudioStreamPlayer2D = $SFXs/Flop_SFX
+@onready var death_sfx:AudioStreamPlayer2D = $SFXs/Death_SFX
 
 @export var GRAVITY:int = 1000
 @export var MAX_VELOCITY:int = 600
@@ -19,6 +21,7 @@ func reset() -> void:
 	animation_player.play("idle")
 
 func flop() -> void:
+	flop_sfx.play()
 	velocity.y = FLOP_SPEED
 
 func _ready() -> void:

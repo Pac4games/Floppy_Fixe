@@ -1,13 +1,14 @@
+AudioStreamPlayer2D
+Node
+Sprite2D
 Label
 ColorRect
 CanvasLayer
-Node
 AnimationPlayer
 Node2D
 Button
 CollisionShape2D
 Area2D
 Timer
-Sprite2D
 AnimatedSprite2D
 CharacterBody2D
