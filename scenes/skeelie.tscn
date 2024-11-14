@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmugg5rnoh313"]
+
+[ext_resource type="Script" path="res://scripts/skeelie.gd" id="1_sr1js"]
+[ext_resource type="Texture2D" uid="uid://bvahm0ph1l5qx" path="res://assets/sprites/skeelie.png" id="1_uoiaw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_quhem"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uoiaw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3nuxs"]
+radius = 19.0
+height = 44.0
+
+[sub_resource type="Animation" id="Animation_ookxi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1229, 324)]
+}
+
+[sub_resource type="Animation" id="Animation_3mny3"]
+resource_name = "spawn"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1229, 324), Vector2(1064, 324)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahqjm"]
+_data = {
+"RESET": SubResource("Animation_ookxi"),
+"spawn": SubResource("Animation_3mny3")
+}
+
+[node name="Skeelie" type="CharacterBody2D"]
+z_index = 2
+position = Vector2(1229, 324)
+scale = Vector2(3.16, 3.16)
+script = ExtResource("1_sr1js")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_quhem")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("CapsuleShape2D_3nuxs")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ahqjm")
+}

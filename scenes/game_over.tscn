@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b5235l87fohj5"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_nqpsn"]
-[ext_resource type="Texture2D" uid="uid://4k73wdosect4" path="res://assets/restart.png" id="1_xs24x"]
+[ext_resource type="Texture2D" uid="uid://4k73wdosect4" path="res://assets/sprites/misc/restart.png" id="1_xs24x"]
 [ext_resource type="FontFile" uid="uid://dn5qjtakljh3a" path="res://assets/fonts/ka1.ttf" id="3_vvmlq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8isx1"]

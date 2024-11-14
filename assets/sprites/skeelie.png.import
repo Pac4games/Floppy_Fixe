@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvqeer71eajb1"
-path="res://.godot/imported/floor.png-38406586736af2fe805d7b886727ee47.ctex"
+uid="uid://bvahm0ph1l5qx"
+path="res://.godot/imported/skeelie.png-fb24d76f30bcd323c5eebb32f14d4cc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/floor.png"
-dest_files=["res://.godot/imported/floor.png-38406586736af2fe805d7b886727ee47.ctex"]
+source_file="res://assets/sprites/skeelie.png"
+dest_files=["res://.godot/imported/skeelie.png-fb24d76f30bcd323c5eebb32f14d4cc7.ctex"]
 
 [params]
 

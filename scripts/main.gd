@@ -6,16 +6,20 @@ extends Node
 @onready var score_label:Label = $ScoreLabel
 @onready var game_over_menu:CanvasLayer = $GameOver
 @onready var save_manager:Node = $SaveManager
+@onready var boss:CharacterBody2D = $Skeelie
 
 # Unsure of the correct syntax to get the PackedScene directly from the file
 # path, so it had to be set directly on the Godot editor
-@export var pipe_scene:PackedScene
+@export var PIPE_SCENE:PackedScene
+@export var BOSS_SCENE:PackedScene
 @export var SCROLL_SPEED:int = 4
 @export var PIPE_DELAY:int = 100
 @export var PIPE_RANGE:int = 125
+@export var MAX_NUM_OF_PIPES_ON_SCREEN:int = 5
 
 var game_running:bool
 var game_over:bool
+var boss_spawned:bool
 var scroll:float
 var score:int
 var ground_height:int
@@ -25,6 +29,7 @@ var screen_size:Vector2i
 func new_game() -> void:
 	game_running = false
 	game_over = false
+	boss_spawned = false
 	scroll = 0
 	score = 0
 	score_label.text = str(score)
@@ -64,7 +69,7 @@ func player_scored() -> void:
 		score_label.text = str(score)
 
 func generate_pipes() -> void:
-	var pipe:Node2D = pipe_scene.instantiate()
+	var pipe:Node2D = PIPE_SCENE.instantiate()
 	pipe.position.x = screen_size.x + PIPE_DELAY
 	pipe.position.y = (float(screen_size.y - ground_height) / 2 ) + randi_range(-PIPE_RANGE, PIPE_RANGE) 
 	pipe.hit.connect(player_hit)
@@ -98,7 +103,7 @@ func _physics_process(_delta:float) -> void:
 		if (Input.is_action_just_pressed("Flop")):
 			if (!game_running):
 				start_game()
-			elif player.flying:
+			elif (player.flying):
 				player.flop()
 				check_top()
 
@@ -113,6 +118,10 @@ func _process(_delta:float) -> void:
 		for pipe in pipes:
 			pipe.position.x -= SCROLL_SPEED
 
-		if (pipes.size() >= 5):
+		if (pipes.size() >= MAX_NUM_OF_PIPES_ON_SCREEN):
 			pipes[0].queue_free()
 			pipes.pop_front()
+
+		if (score == 2 && !boss_spawned):
+			boss_spawned = true
+			boss.spawn()

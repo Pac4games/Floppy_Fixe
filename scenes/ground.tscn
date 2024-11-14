@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://kndqra5rweoc"]
 
 [ext_resource type="Script" path="res://scripts/ground.gd" id="1_vtncr"]
-[ext_resource type="Texture2D" uid="uid://cvqeer71eajb1" path="res://assets/floor.png" id="2_m3o3o"]
+[ext_resource type="Texture2D" uid="uid://cvqeer71eajb1" path="res://assets/sprites/misc/floor.png" id="2_m3o3o"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_gstie"]
 b = Vector2(2304, 0)
