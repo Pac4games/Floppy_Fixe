@@ -42,7 +42,6 @@ func start_game() -> void:
 	player.flop()
 	timer.start()
 	score_label.show()
-	print("HIGH SCORE: " + str(save_manager.highscore))
 
 func stop_game() -> void:
 	timer.stop()
@@ -56,7 +55,8 @@ func stop_game() -> void:
 
 func player_hit() -> void:
 	player.falling = true
-	stop_game()
+	if (!game_over):
+		stop_game()
 
 func player_scored() -> void:
 	if (!player.falling):
@@ -82,7 +82,8 @@ func _on_pipe_timer_timeout() -> void:
 
 func _on_ground_hit() -> void:
 	player.falling = false
-	stop_game()
+	if (!game_over):
+		stop_game()
 
 func _on_game_over_restart() -> void:
 	new_game()

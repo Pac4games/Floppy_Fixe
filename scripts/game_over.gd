@@ -6,7 +6,6 @@ extends CanvasLayer
 signal restart
 
 func display_scores(score:int, highscore:int) -> void:
-	print("score: " + str(score) + " highscore: " + str(highscore))
 	if (score < highscore):
 		game_over_label.text = "Oops, try again!"
 		score_label.text = str(highscore)
