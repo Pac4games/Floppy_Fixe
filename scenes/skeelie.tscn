@@ -56,11 +56,11 @@ _data = {
 }
 
 [node name="Skeelie" type="CharacterBody2D"]
-z_index = 2
 position = Vector2(1229, 324)
 scale = Vector2(3.16, 3.16)
 script = ExtResource("1_sr1js")
 BULLET_COOLDOWN = 1.5
+BULLET_ANGLE = 25.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_quhem")

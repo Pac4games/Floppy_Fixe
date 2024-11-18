@@ -10,7 +10,7 @@ func _ready() -> void:
 	global_scale = Vector2(1, 1)
 
 func _physics_process(_delta:float) -> void:
-	velocity = Vector2(-speed, 0)
+	velocity = Vector2(-speed, 0).rotated(dir)
 	move_and_slide()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

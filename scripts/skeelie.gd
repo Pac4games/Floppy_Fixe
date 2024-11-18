@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var BULLET_SPEED:float = 500.0
 @export var BULLET_OFFSET:float = 80.0
 @export var BULLET_COOLDOWN:float = 3.0
+@export var BULLET_ANGLE:float = 15.0
 @export var BULLET_AMMO:int = 5
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
@@ -24,14 +25,31 @@ func bullet_phase() -> int:
 	var bullets:Array
 
 	for i in BULLET_AMMO:
-		var bullet:Node2D = projectile_scene.instantiate()
-		bullet.spawnPos = global_position
-		bullet.spawnPos.x -= BULLET_OFFSET
-		bullet.speed = BULLET_SPEED
-		bullets.append(bullet)
-		add_child(bullet)
+		var bullet_spread:Array
+		bullet_spread.resize(3)
+
+		var idx:int = 0
+		for bullet in bullet_spread:
+			bullet = projectile_scene.instantiate()
+			bullet.spawnPos = global_position
+			bullet.spawnPos.x -= BULLET_OFFSET
+			bullet.speed = BULLET_SPEED
+
+			match idx:
+				0:
+					bullet.dir = rotation
+				1:
+					bullet.dir = rotation + deg_to_rad(BULLET_ANGLE)
+				2:
+					bullet.dir = rotation + deg_to_rad(-BULLET_ANGLE)
+
+			bullets.append(bullet)
+			add_child(bullet)
+			idx += 1
+
 		timer.start(BULLET_COOLDOWN)
 		await (timer.timeout)
+		bullet_spread.clear()
 	
 	timer.start(BULLET_COOLDOWN)
 	await (timer.timeout)
