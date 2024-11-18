@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var dir:float
 
 func _ready() -> void:
-	rotation = dir
 	global_position = spawnPos
 	global_scale = Vector2(1, 1)
 

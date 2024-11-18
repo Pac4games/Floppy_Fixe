@@ -3,8 +3,8 @@ extends CharacterBody2D
 @export var START_POS:Vector2 = Vector2(1229, 324)
 @export var BULLET_SPEED:float = 500.0
 @export var BULLET_OFFSET:float = 80.0
-@export var BULLET_COOLDOWN:float = 3.0
-@export var BULLET_ANGLE:float = 15.0
+@export var BULLET_COOLDOWN:float = 1.5
+@export var BULLET_ANGLE:float = 25.0
 @export var BULLET_AMMO:int = 5
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
