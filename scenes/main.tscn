@@ -1,28 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://cccj5161diglm"]
+[gd_scene load_steps=9 format=3 uid="uid://cccj5161diglm"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_25l5c"]
 [ext_resource type="PackedScene" uid="uid://nk1tofw6dgkw" path="res://scenes/fixe.tscn" id="2_fblyw"]
 [ext_resource type="PackedScene" uid="uid://b5235l87fohj5" path="res://scenes/game_over.tscn" id="3_crygh"]
-[ext_resource type="PackedScene" uid="uid://dmugg5rnoh313" path="res://scenes/skeelie.tscn" id="3_ty2lw"]
 [ext_resource type="Script" path="res://scripts/save_manager.gd" id="3_wncvn"]
 [ext_resource type="PackedScene" uid="uid://kndqra5rweoc" path="res://scenes/ground.tscn" id="4_elkyq"]
 [ext_resource type="Texture2D" uid="uid://di6m5ca1d3fcl" path="res://assets/sprites/misc/bg.jpg" id="4_eo46x"]
-[ext_resource type="PackedScene" uid="uid://cb7slwuuls7qv" path="res://scenes/pipe.tscn" id="4_u0i2s"]
 [ext_resource type="FontFile" uid="uid://dn5qjtakljh3a" path="res://assets/fonts/ka1.ttf" id="6_k1e6e"]
 [ext_resource type="AudioStream" uid="uid://dp0e7dpdx01y8" path="res://assets/soundtracks/totally_original_bg_music.wav" id="9_41hla"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_25l5c")
-PIPE_SCENE = ExtResource("4_u0i2s")
-BOSS_SCENE = ExtResource("3_ty2lw")
 
 [node name="SaveManager" type="Node" parent="."]
 script = ExtResource("3_wncvn")
 
 [node name="GameOver" parent="." instance=ExtResource("3_crygh")]
 visible = false
-
-[node name="Skeelie" parent="." instance=ExtResource("3_ty2lw")]
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(578, 339)

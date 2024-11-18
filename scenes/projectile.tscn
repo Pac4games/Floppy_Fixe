@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5wheub4smosg"]
+
+[ext_resource type="Texture2D" uid="uid://byl0fnivy3ebc" path="res://assets/sprites/skeelie/projectile.png" id="1_hvpe3"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_u51qo"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_fq4qe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnfcb"]
+radius = 20.0
+
+[node name="Projectile" type="CharacterBody2D"]
+script = ExtResource("1_u51qo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_fq4qe")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("1_hvpe3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hnfcb")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

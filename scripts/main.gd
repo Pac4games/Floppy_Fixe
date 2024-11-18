@@ -6,12 +6,12 @@ extends Node
 @onready var score_label:Label = $ScoreLabel
 @onready var game_over_menu:CanvasLayer = $GameOver
 @onready var save_manager:Node = $SaveManager
-@onready var boss:CharacterBody2D = $Skeelie
+@onready var pipe_scene:PackedScene = load("res://scenes/pipe.tscn")
+@onready var boss_scene:PackedScene = load("res://scenes/skeelie.tscn")
+@onready var boss:Node2D
 
 # Unsure of the correct syntax to get the PackedScene directly from the file
 # path, so it had to be set directly on the Godot editor
-@export var PIPE_SCENE:PackedScene
-@export var BOSS_SCENE:PackedScene
 @export var SCROLL_SPEED:int = 4
 @export var PIPE_DELAY:int = 100
 @export var PIPE_RANGE:int = 125
@@ -69,18 +69,24 @@ func player_scored() -> void:
 		score_label.text = str(score)
 
 func generate_pipes() -> void:
-	var pipe:Node2D = PIPE_SCENE.instantiate()
-	pipe.position.x = screen_size.x + PIPE_DELAY
-	pipe.position.y = (float(screen_size.y - ground_height) / 2 ) + randi_range(-PIPE_RANGE, PIPE_RANGE) 
-	pipe.hit.connect(player_hit)
-	pipe.scored.connect(player_scored)
-	add_child(pipe)
-	pipes.append(pipe)
+	if (!boss_spawned):
+		var pipe:Node2D = pipe_scene.instantiate()
+		pipe.position.x = screen_size.x + PIPE_DELAY
+		pipe.position.y = (float(screen_size.y - ground_height) / 2 ) + randi_range(-PIPE_RANGE, PIPE_RANGE) 
+		pipe.hit.connect(player_hit)
+		pipe.scored.connect(player_scored)
+		add_child(pipe)
+		pipes.append(pipe)
 
 func check_top() -> void:
 	if (player.position.y < 0):
 		player.falling = true
 		stop_game()
+
+func spawn_boss() -> void:
+	boss = boss_scene.instantiate()
+	add_child(boss)
+	boss_spawned = true
 
 func _on_pipe_timer_timeout() -> void:
 	generate_pipes()
@@ -91,6 +97,8 @@ func _on_ground_hit() -> void:
 		stop_game()
 
 func _on_game_over_restart() -> void:
+	if (boss_spawned):
+		boss.queue_free()
 	new_game()
 
 func _ready() -> void:
@@ -123,5 +131,4 @@ func _process(_delta:float) -> void:
 			pipes.pop_front()
 
 		if (score == 2 && !boss_spawned):
-			boss_spawned = true
-			boss.spawn()
+			spawn_boss()

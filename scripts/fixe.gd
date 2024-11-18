@@ -13,6 +13,9 @@ extends CharacterBody2D
 var flying:bool
 var falling:bool
 
+func die() -> void:
+	get_parent().player_hit()
+
 func reset() -> void:
 	falling = false
 	flying = false

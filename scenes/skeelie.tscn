@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dmugg5rnoh313"]
 
 [ext_resource type="Script" path="res://scripts/skeelie.gd" id="1_sr1js"]
-[ext_resource type="Texture2D" uid="uid://bvahm0ph1l5qx" path="res://assets/sprites/skeelie.png" id="1_uoiaw"]
+[ext_resource type="Texture2D" uid="uid://bvahm0ph1l5qx" path="res://assets/sprites/skeelie/skeelie.png" id="1_uoiaw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_quhem"]
 animations = [{
@@ -60,6 +60,7 @@ z_index = 2
 position = Vector2(1229, 324)
 scale = Vector2(3.16, 3.16)
 script = ExtResource("1_sr1js")
+BULLET_COOLDOWN = 1.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_quhem")
@@ -73,3 +74,5 @@ disabled = true
 libraries = {
 "": SubResource("AnimationLibrary_ahqjm")
 }
+
+[node name="Timer" type="Timer" parent="."]
