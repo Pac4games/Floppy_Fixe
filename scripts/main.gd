@@ -1,5 +1,10 @@
 extends Node
 
+@export var SCROLL_SPEED:int = 4
+@export var PIPE_DELAY:int = 100
+@export var PIPE_RANGE:int = 125
+@export var MAX_NUM_OF_PIPES_ON_SCREEN:int = 5
+
 @onready var player:CharacterBody2D = $Fixe
 @onready var ground:Area2D = $Ground
 @onready var timer:Timer = $PipeTimer
@@ -10,13 +15,6 @@ extends Node
 @onready var boss_scene:PackedScene = load("res://scenes/skeelie.tscn")
 @onready var boss:Node2D
 
-# Unsure of the correct syntax to get the PackedScene directly from the file
-# path, so it had to be set directly on the Godot editor
-@export var SCROLL_SPEED:int = 4
-@export var PIPE_DELAY:int = 100
-@export var PIPE_RANGE:int = 125
-@export var MAX_NUM_OF_PIPES_ON_SCREEN:int = 5
-
 var game_running:bool
 var game_over:bool
 var boss_spawned:bool
@@ -25,6 +23,51 @@ var score:int
 var ground_height:int
 var pipes:Array
 var screen_size:Vector2i
+
+func _ready() -> void:
+	screen_size = get_window().size
+	ground_height = ground.get_node("Sprite2D").texture.get_height()
+	new_game()
+
+func _process(_delta:float) -> void:
+	if (game_running):
+		scroll += SCROLL_SPEED
+		# Reset ground scroll
+		if (scroll >= screen_size.x):
+			scroll = 0
+		ground.position.x = -scroll
+
+		for pipe in pipes:
+			pipe.position.x -= SCROLL_SPEED
+
+		if (pipes.size() >= MAX_NUM_OF_PIPES_ON_SCREEN):
+			pipes[0].queue_free()
+			pipes.pop_front()
+
+		if (score == 2 && !boss_spawned):
+			spawn_boss()
+
+func _physics_process(_delta:float) -> void:
+	if (!game_over):
+		if (Input.is_action_just_pressed("Flop")):
+			if (!game_running):
+				start_game()
+			elif (player.flying):
+				player.flop()
+				check_top()
+
+func _on_pipe_timer_timeout() -> void:
+	generate_pipes()
+
+func _on_ground_hit() -> void:
+	player.falling = false
+	if (!game_over):
+		stop_game()
+
+func _on_game_over_restart() -> void:
+	if (boss_spawned):
+		boss.queue_free()
+	get_tree().reload_current_scene()
 
 func new_game() -> void:
 	game_running = false
@@ -87,48 +130,3 @@ func spawn_boss() -> void:
 	boss = boss_scene.instantiate()
 	add_child(boss)
 	boss_spawned = true
-
-func _on_pipe_timer_timeout() -> void:
-	generate_pipes()
-
-func _on_ground_hit() -> void:
-	player.falling = false
-	if (!game_over):
-		stop_game()
-
-func _on_game_over_restart() -> void:
-	if (boss_spawned):
-		boss.queue_free()
-	new_game()
-
-func _ready() -> void:
-	screen_size = get_window().size
-	ground_height = ground.get_node("Sprite2D").texture.get_height()
-	new_game()
-
-func _physics_process(_delta:float) -> void:
-	if (!game_over):
-		if (Input.is_action_just_pressed("Flop")):
-			if (!game_running):
-				start_game()
-			elif (player.flying):
-				player.flop()
-				check_top()
-
-func _process(_delta:float) -> void:
-	if (game_running):
-		scroll += SCROLL_SPEED
-		# Reset ground scroll
-		if (scroll >= screen_size.x):
-			scroll = 0
-		ground.position.x = -scroll
-
-		for pipe in pipes:
-			pipe.position.x -= SCROLL_SPEED
-
-		if (pipes.size() >= MAX_NUM_OF_PIPES_ON_SCREEN):
-			pipes[0].queue_free()
-			pipes.pop_front()
-
-		if (score == 2 && !boss_spawned):
-			spawn_boss()

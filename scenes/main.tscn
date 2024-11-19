@@ -19,7 +19,7 @@ script = ExtResource("3_wncvn")
 visible = false
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(578, 339)
+position = Vector2(586, 330)
 scale = Vector2(0.622483, 0.622483)
 texture = ExtResource("4_eo46x")
 

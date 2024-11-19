@@ -1,6 +1,10 @@
 extends CharacterBody2D
 
-@export var START_POS:Vector2 = Vector2(1229, 324)
+@export var START_POS:Vector2 = Vector2(1229, 300)
+
+# Bullet phase variables
+@export var MOVE_RANGE:float = 170.0
+@export var MOVE_SPEED:float = 1.5
 @export var BULLET_SPEED:float = 500.0
 @export var BULLET_OFFSET:float = 80.0
 @export var BULLET_COOLDOWN:float = 1.5
@@ -11,17 +15,29 @@ extends CharacterBody2D
 @onready var timer:Timer = $Timer
 @onready var projectile_scene:PackedScene = load("res://scenes/projectile.tscn")
 
-func wait_secs(time:float) -> void:
-	timer.start(time)
-	await (timer.timeout)
+var base_y:float
+var time_passed:float = 0.0
+var phase_num:int = 0
+
+func _ready() -> void:
+	position = START_POS
+	spawn()
+
+# Boss movement
+func _process(delta:float) -> void:
+	if (phase_num == 1):
+		time_passed += delta * MOVE_SPEED
+		position.y = base_y + (sin(time_passed) * MOVE_RANGE)
 
 func spawn() -> void:
 	animation_player.play("spawn")
 	await (animation_player.animation_finished)
+	base_y = position.y
 	await (bullet_phase())
 	eel_phase()
 
 func bullet_phase() -> int:
+	phase_num = 1
 	var bullets:Array
 
 	for i in BULLET_AMMO:
@@ -44,7 +60,7 @@ func bullet_phase() -> int:
 					bullet.dir = rotation + deg_to_rad(-BULLET_ANGLE)
 
 			bullets.append(bullet)
-			add_child(bullet)
+			get_tree().root.add_child(bullet)
 			idx += 1
 
 		timer.start(BULLET_COOLDOWN)
@@ -61,7 +77,3 @@ func bullet_phase() -> int:
 
 func eel_phase() -> void:
 	print("EEEEEL")
-
-func _ready() -> void:
-	position = START_POS
-	spawn()
