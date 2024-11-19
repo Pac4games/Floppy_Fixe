@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl424bg0n71di"]
+
+[ext_resource type="Script" path="res://scripts/projectile_score_area.gd" id="1_gmmwt"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_il2mq"]
+b = Vector2(-1, 517)
+
+[node name="ProjectileScoreArea" type="Area2D"]
+script = ExtResource("1_gmmwt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_il2mq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
