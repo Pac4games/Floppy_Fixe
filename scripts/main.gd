@@ -9,8 +9,8 @@ extends Node
 @onready var ground:Area2D = $Ground
 @onready var timer:Timer = $PipeTimer
 @onready var score_label:Label = $ScoreLabel
-@onready var game_over_menu:CanvasLayer = $GameOver
 @onready var save_manager:Node = $SaveManager
+@onready var game_over_menu:CanvasLayer = $GameOver
 @onready var pipe_scene:PackedScene = load("res://scenes/pipe.tscn")
 @onready var boss_scene:PackedScene = load("res://scenes/skeelie.tscn")
 @onready var boss:Node2D
@@ -66,6 +66,7 @@ func _on_ground_hit() -> void:
 
 func _on_game_over_restart() -> void:
 	if (boss_spawned):
+		boss.clear_bullets()
 		boss.queue_free()
 	get_tree().reload_current_scene()
 
@@ -76,10 +77,6 @@ func new_game() -> void:
 	scroll = 0
 	score = 0
 	score_label.text = str(score)
-	score_label.hide()
-	game_over_menu.hide()
-	get_tree().call_group("pipes", "queue_free")
-	pipes.clear()
 	generate_pipes()
 	player.reset()
 

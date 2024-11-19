@@ -1,3 +1,4 @@
+res://scripts/skeelie.gd
 res://scenes/main.tscn
 res://scenes/fixe.tscn
 res://scenes/ground.tscn
@@ -5,8 +6,12 @@ res://scenes/pipe.tscn
 res://scenes/game_over.tscn
 res://scenes/skeelie.tscn
 res://scenes/projectile.tscn
-res://scripts/skeelie.gd
 res://scripts/projectile.gd
-res://scripts/pipe.gd
 res://scripts/main.gd
+res://scripts/fixe.gd
+res://scenes/eels.tscn
+res://scripts/eels.gd
+res://scripts/pipe.gd
 res://scripts/game_over.gd
+res://scripts/ground.gd
+res://scripts/save_manager.gd

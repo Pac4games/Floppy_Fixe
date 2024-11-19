@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var START_POS:Vector2 = Vector2(1229, 300)
 
-# Bullet phase variables
 @export var MOVE_RANGE:float = 170.0
 @export var MOVE_SPEED:float = 1.5
 @export var BULLET_SPEED:float = 500.0
@@ -12,33 +11,46 @@ extends CharacterBody2D
 @export var BULLET_AMMO:int = 5
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready var shoot_sfx:AudioStreamPlayer2D = $ShootSFX
 @onready var timer:Timer = $Timer
 @onready var projectile_scene:PackedScene = load("res://scenes/projectile.tscn")
+@onready var eel_scene:PackedScene = load("res://scenes/eels.tscn")
+@onready var main:Node2D
 
+var moving:bool
 var base_y:float
 var time_passed:float = 0.0
 var phase_num:int = 0
+var random_move_dir:int = 1
+var bullets:Array
 
 func _ready() -> void:
+	main = get_tree().get_root().get_node("Main")
 	position = START_POS
+	if (randi_range(0, 1)):
+		random_move_dir = -1
+	moving = false
 	spawn()
 
 # Boss movement
 func _process(delta:float) -> void:
-	if (phase_num == 1):
+	if (moving):
 		time_passed += delta * MOVE_SPEED
-		position.y = base_y + (sin(time_passed) * MOVE_RANGE)
+		position.y = base_y + (sin(time_passed) * MOVE_RANGE * random_move_dir)
 
 func spawn() -> void:
 	animation_player.play("spawn")
 	await (animation_player.animation_finished)
 	base_y = position.y
 	await (bullet_phase())
-	eel_phase()
+
+func clear_bullets() -> void:
+	for bullet in bullets:
+		bullet.queue_free()
+	bullets.clear()
 
 func bullet_phase() -> int:
-	phase_num = 1
-	var bullets:Array
+	moving = true
 
 	for i in BULLET_AMMO:
 		var bullet_spread:Array
@@ -60,7 +72,8 @@ func bullet_phase() -> int:
 					bullet.dir = rotation + deg_to_rad(-BULLET_ANGLE)
 
 			bullets.append(bullet)
-			get_tree().root.add_child(bullet)
+			main.add_child(bullet)
+			shoot_sfx.play()
 			idx += 1
 
 		timer.start(BULLET_COOLDOWN)
@@ -69,11 +82,6 @@ func bullet_phase() -> int:
 	
 	timer.start(BULLET_COOLDOWN)
 	await (timer.timeout)
-	for bullet in bullets:
-		bullet.queue_free()
-	bullets.clear()
+	clear_bullets()
 
 	return (1)
-
-func eel_phase() -> void:
-	print("EEEEEL")
