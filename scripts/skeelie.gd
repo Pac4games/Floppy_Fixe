@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
-@export var START_POS:Vector2 = Vector2(1229, 300)
-
+@export var START_POS:Vector2 = Vector2(1064, 300)
 @export var MOVE_RANGE:float = 170.0
 @export var MOVE_SPEED:float = 1.5
 @export var BULLET_SPEED:float = 500.0
@@ -9,13 +8,14 @@ extends CharacterBody2D
 @export var BULLET_COOLDOWN:float = 1.5
 @export var BULLET_ANGLE:float = 25.0
 @export var BULLET_AMMO:int = 5
+@export var SCORE_AREA_OFFSET = 20.0
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var shoot_sfx:AudioStreamPlayer2D = $ShootSFX
 @onready var timer:Timer = $Timer
 @onready var collider:CollisionShape2D = $CollisionShape2D
 @onready var projectile_scene:PackedScene = load("res://scenes/projectile.tscn")
-@onready var eel_scene:PackedScene = load("res://scenes/eels.tscn")
+@onready var score_area_scene:PackedScene = load("res://scenes/projectile_score_area.tscn")
 @onready var main:Node
 
 var moving:bool
@@ -27,11 +27,9 @@ var bullets:Array
 
 func _ready() -> void:
 	main = get_tree().root
-	position = START_POS
 	if (randi_range(0, 1)):
 		random_move_dir = -1
 	moving = false
-	collider.disabled = true
 	spawn()
 
 # Boss movement
@@ -39,13 +37,18 @@ func _process(delta:float) -> void:
 	if (moving):
 		time_passed += delta * MOVE_SPEED
 		position.y = base_y + (sin(time_passed) * MOVE_RANGE * random_move_dir)
+	else:
+		position = position.lerp(START_POS, delta * MOVE_SPEED * 4)
+
+	if (position.distance_to(START_POS) < 1.0):
+		position = START_POS
 
 func spawn() -> void:
 	animation_player.play("spawn")
 	await (animation_player.animation_finished)
 	base_y = position.y
 	await (bullet_phase())
-	die()
+	fucking_explode()
 
 func clear_bullets() -> void:
 	for bullet in bullets:
@@ -54,6 +57,7 @@ func clear_bullets() -> void:
 
 func spawn_bullet_spread(bullet_spread:Array) -> void:
 	var idx:int = 0
+
 	for bullet in bullet_spread:
 		bullet = projectile_scene.instantiate()
 		bullet.spawnPos = global_position
@@ -63,6 +67,7 @@ func spawn_bullet_spread(bullet_spread:Array) -> void:
 		match idx:
 			0:
 				bullet.dir = rotation
+				bullet.add_child(score_area_scene.instantiate())
 			1:
 				bullet.dir = rotation + deg_to_rad(BULLET_ANGLE)
 			2:
@@ -72,9 +77,6 @@ func spawn_bullet_spread(bullet_spread:Array) -> void:
 		main.add_child(bullet)
 		shoot_sfx.play()
 		idx += 1
-
-func spawn_bullet_score_trigger() -> void:
-	pass
 
 func bullet_phase() -> int:
 	moving = true
@@ -93,5 +95,5 @@ func bullet_phase() -> int:
 
 	return (1)
 
-func die() -> void:
-	collider.disabled = false
+func fucking_explode() -> void:
+	moving = false

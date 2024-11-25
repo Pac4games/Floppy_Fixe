@@ -1,6 +1,5 @@
 extends Area2D
 
-signal scored
-
-func _on_body_entered(_body: Node2D) -> void:
-	scored.emit()
+func _on_body_entered(body: Node2D) -> void:
+	if (body.name == "Fixe"):
+		body.scored()

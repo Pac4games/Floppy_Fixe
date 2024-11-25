@@ -16,6 +16,9 @@ var falling:bool
 func die() -> void:
 	get_parent().player_hit()
 
+func scored() -> void:
+	get_parent().player_scored()
+
 func reset() -> void:
 	falling = false
 	flying = false
