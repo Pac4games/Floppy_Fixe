@@ -4,6 +4,7 @@ extends Node
 @export var PIPE_DELAY:int = 100
 @export var PIPE_RANGE:int = 125
 @export var MAX_NUM_OF_PIPES_ON_SCREEN:int = 5
+@export var SCORE_TO_BOSS:int = 14
 
 @onready var player:CharacterBody2D = $Fixe
 @onready var ground:Area2D = $Ground
@@ -20,6 +21,7 @@ var game_over:bool
 var boss_spawned:bool
 var scroll:float
 var score:int
+var tmp_score2boss:int
 var ground_height:int
 var pipes:Array
 var screen_size:Vector2i
@@ -27,6 +29,7 @@ var screen_size:Vector2i
 func _ready() -> void:
 	screen_size = get_window().size
 	ground_height = ground.get_node("Sprite2D").texture.get_height()
+	tmp_score2boss = 0
 	new_game()
 
 func _process(_delta:float) -> void:
@@ -44,7 +47,7 @@ func _process(_delta:float) -> void:
 			pipes[0].queue_free()
 			pipes.pop_front()
 
-		if (score == 2 && !boss_spawned):
+		if (tmp_score2boss == SCORE_TO_BOSS):
 			spawn_boss()
 
 func _physics_process(_delta:float) -> void:
@@ -104,8 +107,10 @@ func player_hit() -> void:
 		stop_game()
 
 func player_scored() -> void:
-	if (!player.falling):
+	if (!player.falling && !game_over):
 		score += 1
+		if (!boss_spawned):
+			tmp_score2boss += 1
 		score_label.text = str(score)
 
 func generate_pipes() -> void:
@@ -127,3 +132,4 @@ func spawn_boss() -> void:
 	boss = boss_scene.instantiate()
 	add_child(boss)
 	boss_spawned = true
+	tmp_score2boss = 0

@@ -12,6 +12,8 @@ extends CharacterBody2D
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var shoot_sfx:AudioStreamPlayer2D = $ShootSFX
+@onready var explosion:AnimatedSprite2D = $Explosion
+@onready var explosion_sfx:AudioStreamPlayer2D = $ExplosionSFX
 @onready var timer:Timer = $Timer
 @onready var collider:CollisionShape2D = $CollisionShape2D
 @onready var projectile_scene:PackedScene = load("res://scenes/projectile.tscn")
@@ -19,6 +21,7 @@ extends CharacterBody2D
 @onready var main:Node
 
 var moving:bool
+var is_dead:bool
 var base_y:float
 var time_passed:float = 0.0
 var phase_num:int = 0
@@ -26,7 +29,7 @@ var random_move_dir:int = 1
 var bullets:Array
 
 func _ready() -> void:
-	main = get_tree().root
+	main = get_tree().get_root().get_node("Main")
 	if (randi_range(0, 1)):
 		random_move_dir = -1
 	moving = false
@@ -48,7 +51,8 @@ func spawn() -> void:
 	await (animation_player.animation_finished)
 	base_y = position.y
 	await (bullet_phase())
-	fucking_explode()
+	if (!main.game_over):
+		fucking_explode()
 
 func clear_bullets() -> void:
 	for bullet in bullets:
@@ -92,8 +96,21 @@ func bullet_phase() -> int:
 	timer.start(BULLET_COOLDOWN)
 	await (timer.timeout)
 	clear_bullets()
+	moving = false
 
 	return (1)
 
 func fucking_explode() -> void:
 	moving = false
+	print("EXPLODE FUCK")
+	while (position != START_POS):
+		await (get_tree().process_frame)
+
+	animation_player.play("impact")
+	await (animation_player.animation_finished)
+	explosion.visible = true
+	explosion.play("default")
+	explosion_sfx.play()
+	animation_player.play("begone")
+	await (animation_player.animation_finished)
+	main.boss_spawned = false
