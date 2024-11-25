@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://nk1tofw6dgkw" path="res://scenes/fixe.tscn" id="2_fblyw"]
 [ext_resource type="PackedScene" uid="uid://b5235l87fohj5" path="res://scenes/game_over.tscn" id="3_crygh"]
 [ext_resource type="Script" path="res://scripts/save_manager.gd" id="3_wncvn"]
+[ext_resource type="Texture2D" uid="uid://c6ysgtm4j3soh" path="res://assets/sprites/misc/background.png" id="4_cxoxk"]
 [ext_resource type="PackedScene" uid="uid://kndqra5rweoc" path="res://scenes/ground.tscn" id="4_elkyq"]
-[ext_resource type="Texture2D" uid="uid://di6m5ca1d3fcl" path="res://assets/sprites/misc/bg.jpg" id="4_eo46x"]
 [ext_resource type="FontFile" uid="uid://dn5qjtakljh3a" path="res://assets/fonts/ka1.ttf" id="6_k1e6e"]
 [ext_resource type="AudioStream" uid="uid://dp0e7dpdx01y8" path="res://assets/soundtracks/totally_original_bg_music.wav" id="9_41hla"]
 
@@ -19,15 +19,16 @@ script = ExtResource("3_wncvn")
 visible = false
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(586, 330)
-scale = Vector2(0.622483, 0.622483)
-texture = ExtResource("4_eo46x")
+position = Vector2(578.579, 323.876)
+scale = Vector2(3.24124, 3.24124)
+texture = ExtResource("4_cxoxk")
 
 [node name="Ground" parent="." instance=ExtResource("4_elkyq")]
 z_index = 2
 
 [node name="Fixe" parent="." instance=ExtResource("2_fblyw")]
 position = Vector2(576, 324)
+scale = Vector2(1.44, 1.44)
 
 [node name="PipeTimer" type="Timer" parent="."]
 wait_time = 1.5

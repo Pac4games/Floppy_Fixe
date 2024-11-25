@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d3m25hiyul0ed" path="res://assets/sprites/misc/pipe.png" id="1_8u3ma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oy07q"]
-size = Vector2(78, 557)
+size = Vector2(78, 541.5)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ex268"]
 a = Vector2(0, 3.125)
@@ -18,7 +18,9 @@ script = ExtResource("1_0gaxf")
 [node name="Upper" type="Sprite2D" parent="."]
 position = Vector2(0, -350)
 rotation = 3.14159
+scale = Vector2(4.71999, 4.71999)
 texture = ExtResource("1_8u3ma")
+flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -351.5)
@@ -26,13 +28,16 @@ shape = SubResource("RectangleShape2D_oy07q")
 
 [node name="Lower" type="Sprite2D" parent="."]
 position = Vector2(0, 350)
+scale = Vector2(4.6394, 4.6394)
 texture = ExtResource("1_8u3ma")
+flip_v = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, 354)
+position = Vector2(0, 361.75)
 shape = SubResource("RectangleShape2D_oy07q")
 
 [node name="ScoreArea" type="Area2D" parent="."]
+position = Vector2(19, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
 position = Vector2(43, -72)

@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var BULLET_OFFSET:float = 80.0
 @export var BULLET_COOLDOWN:float = 1.5
 @export var BULLET_ANGLE:float = 25.0
-@export var BULLET_AMMO:int = 5
+@export var BULLET_AMMO:int = 10
 @export var SCORE_AREA_OFFSET = 20.0
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
@@ -102,7 +102,6 @@ func bullet_phase() -> int:
 
 func fucking_explode() -> void:
 	moving = false
-	print("EXPLODE FUCK")
 	while (position != START_POS):
 		await (get_tree().process_frame)
 

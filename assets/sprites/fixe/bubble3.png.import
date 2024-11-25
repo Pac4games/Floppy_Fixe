@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmvegt5dvn1mo"
-path="res://.godot/imported/bird1.png-2dc73b0c4f6e2ca1180f03cc3d8f322a.ctex"
+uid="uid://dupbdio54jf7t"
+path="res://.godot/imported/bubble3.png-b3a67dbdedb0dc80a6bd3ccf04702311.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/fixe/bird1.png"
-dest_files=["res://.godot/imported/bird1.png-2dc73b0c4f6e2ca1180f03cc3d8f322a.ctex"]
+source_file="res://assets/sprites/fixe/bubble3.png"
+dest_files=["res://.godot/imported/bubble3.png-b3a67dbdedb0dc80a6bd3ccf04702311.ctex"]
 
 [params]
 

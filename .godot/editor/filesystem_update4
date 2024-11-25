@@ -15,3 +15,6 @@ res://scripts/projectile.gd
 res://scripts/projectile_score_area.gd
 res://scripts/save_manager.gd
 res://scripts/skeelie.gd
+res://scenes/game_over.tscn
+res://main_menu.tscn
+res://scripts/menu.gd

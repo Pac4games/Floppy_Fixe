@@ -35,10 +35,6 @@ func _ready() -> void:
 func _process(_delta:float) -> void:
 	if (game_running):
 		scroll += SCROLL_SPEED
-		# Reset ground scroll
-		if (scroll >= screen_size.x):
-			scroll = 0
-		ground.position.x = -scroll
 
 		for pipe in pipes:
 			pipe.position.x -= SCROLL_SPEED
@@ -87,6 +83,7 @@ func start_game() -> void:
 	game_running = true
 	player.flying = true
 	player.animation_player.stop()
+	player.bubble.play("burst")
 	player.flop()
 	timer.start()
 	score_label.show()

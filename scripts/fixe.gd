@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite:AnimatedSprite2D = $AnimatedSprite2D
+@onready var bubble:AnimatedSprite2D = $Bubble
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var flop_sfx:AudioStreamPlayer2D = $SFXs/Flop_SFX
 @onready var death_sfx:AudioStreamPlayer2D = $SFXs/Death_SFX
@@ -25,6 +26,7 @@ func reset() -> void:
 	position = START_POS    # Already created by CharacterBody2D
 	set_rotation(0)
 	animation_player.play("idle")
+	bubble.frame = 0
 
 func flop() -> void:
 	flop_sfx.play()

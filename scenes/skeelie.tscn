@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://dmugg5rnoh313"]
 
 [ext_resource type="Script" path="res://scripts/skeelie.gd" id="1_sr1js"]
-[ext_resource type="Texture2D" uid="uid://bvahm0ph1l5qx" path="res://assets/sprites/skeelie/skeelie.png" id="1_uoiaw"]
+[ext_resource type="Texture2D" uid="uid://bm68bq0g0euyn" path="res://assets/sprites/skeelie/skeelie1.png" id="2_awurh"]
 [ext_resource type="AudioStream" uid="uid://cqwu86vb5726m" path="res://assets/sfx/shoot.wav" id="3_s0kqb"]
 [ext_resource type="Texture2D" uid="uid://d3m25hiyul0ed" path="res://assets/sprites/misc/pipe.png" id="4_txgvp"]
 [ext_resource type="Texture2D" uid="uid://dt4lmb00i7nay" path="res://assets/sprites/misc/explosion_real.png" id="5_o4xtb"]
@@ -11,7 +11,7 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_uoiaw")
+"texture": ExtResource("2_awurh")
 }],
 "loop": true,
 "name": &"default",
@@ -126,7 +126,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(46.8354, 76.5823), Vector2(30.3797, 76.5823)]
+"values": [Vector2(46.8354, 65.8228), Vector2(9.17721, 65.8228)]
 }
 
 [sub_resource type="Animation" id="Animation_pf453"]
@@ -147,26 +147,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Pipe:position")
+tracks/1/path = NodePath("Pipe:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(30.3797, 76.5823), Vector2(30.3797, 76.5823), Vector2(-169.304, 201.582)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pipe:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pipe:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(9.17721, 65.8228), Vector2(9.17721, 65.8228), Vector2(-191.456, 192.405)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ahqjm"]
@@ -333,8 +333,9 @@ stream = ExtResource("3_s0kqb")
 
 [node name="Pipe" type="Sprite2D" parent="."]
 position = Vector2(46.8354, 76.5823)
-scale = Vector2(0.317429, 0.317429)
+scale = Vector2(1.30477, 1.30477)
 texture = ExtResource("4_txgvp")
+flip_v = true
 
 [node name="Explosion" type="AnimatedSprite2D" parent="."]
 visible = false

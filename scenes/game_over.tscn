@@ -1,22 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5235l87fohj5"]
+[gd_scene load_steps=8 format=3 uid="uid://b5235l87fohj5"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_nqpsn"]
-[ext_resource type="Texture2D" uid="uid://4k73wdosect4" path="res://assets/sprites/misc/restart.png" id="1_xs24x"]
+[ext_resource type="Texture2D" uid="uid://vo66yktcgqvp" path="res://assets/ui/but.png" id="3_0i2kb"]
 [ext_resource type="FontFile" uid="uid://dn5qjtakljh3a" path="res://assets/fonts/ka1.ttf" id="3_vvmlq"]
+[ext_resource type="Texture2D" uid="uid://dx5tw3722ljai" path="res://assets/ui/rect.png" id="4_nebxl"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8isx1"]
-texture = ExtResource("1_xs24x")
+texture = ExtResource("3_0i2kb")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5ngsd"]
-texture = ExtResource("1_xs24x")
+texture = ExtResource("3_0i2kb")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s5ekx"]
-texture = ExtResource("1_xs24x")
+texture = ExtResource("3_0i2kb")
 
 [node name="GameOver" type="CanvasLayer"]
 script = ExtResource("1_nqpsn")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(580, 353)
+scale = Vector2(2.92, 2.92)
+texture = ExtResource("4_nebxl")
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = 443.0
 offset_top = 182.0
 offset_right = 718.0
@@ -25,9 +32,9 @@ color = Color(1, 0.821198, 0.541152, 1)
 
 [node name="RestartButton" type="Button" parent="."]
 offset_left = 501.0
-offset_top = 462.0
+offset_top = 448.0
 offset_right = 661.0
-offset_bottom = 525.0
+offset_bottom = 511.0
 theme_override_styles/hover = SubResource("StyleBoxTexture_8isx1")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_5ngsd")
 theme_override_styles/normal = SubResource("StyleBoxTexture_s5ekx")
